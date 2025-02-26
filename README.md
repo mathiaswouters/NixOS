@@ -53,4 +53,5 @@ Explanation ...
 
 ### Configure NixOS
 
+- Configure NixOS Config file: `sudo nano /etc/nixos/configuration.nix`
 
