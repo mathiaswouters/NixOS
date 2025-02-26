@@ -4,6 +4,8 @@
 
 Explanation ...
 
+Search Nix packages using this [link](https://search.nixos.org/packages)
+
 ---
 
 ## ...
