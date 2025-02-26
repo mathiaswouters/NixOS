@@ -48,5 +48,5 @@ Explanation ...
 9. **Install**:
    - Press `Next`
 10. **Finish**:
-   - Close **NixOS Installer** tab
+   - Press `Done`
    - Shutdown system
