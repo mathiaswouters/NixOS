@@ -39,17 +39,45 @@
     LC_TIME = "nl_BE.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  # Enable Hyprland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # Enable the X11 windowing system
+  services.xserver = {
+    enable = true;
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+  };
+
+  # Configure graphics (adjust for your hardware)
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+  };
+
+  # Sound configuration with PipeWire
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mathias = {
     isNormalUser = true;
     description = "Mathias Wouters";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
     packages = with pkgs; [];
   };
 
@@ -59,8 +87,45 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+  # Essential tools
+    wget
+    git
+    vim
+    neovim
+    htop
+    firefox
+    kitty
+    
+    # Wayland utilities
+    waybar
+    wofi
+    swww  # Wallpaper
+    wl-clipboard
+    grim  # Screenshot
+    slurp # Area selection
+    mako  # Notifications
+    
+    # Appearance
+    nerdfonts
+    papirus-icon-theme
+    
+    # Development tools
+    gnumake
+    gcc
+    
+    # System utilities
+    brightnessctl
+    pamixer
+    networkmanagerapplet
+  ];
+
+  # Fonts configuration
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
+    font-awesome
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
