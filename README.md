@@ -12,7 +12,7 @@ Explanation ...
 
 ### Prepare installation media
 
-- Download NixOS ISO (GNOME): [nixos.org](https://nixos.org/download/#graphical-iso-image)
+- Download NixOS ISO (GNOME): [nixos.org](https://nixos.org/download/)
 
 ### Install NixOS
 
