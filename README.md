@@ -12,19 +12,18 @@ Explanation ...
 
 ### Prepare installation media
 
-Download NixOS ISO (GNOME): [nixos.org](https://nixos.org/download/#graphical-iso-image)
+- Download NixOS ISO (GNOME): [nixos.org](https://nixos.org/download/#graphical-iso-image)
 
 ### Install NixOS
 
-#### Test
-
 1. **Welcome**:
-2. **Location**:
-3. **Keyboard**:
-4. **Users**:
-5. **Desktop**:
-6. **Unfree Software**:
-7. **Partitions**:
-8. **Summary**:
-9. **Install**:
-10. **Finish**:
+  - ...
+3. **Location**:
+4. **Keyboard**:
+5. **Users**:
+6. **Desktop**:
+7. **Unfree Software**:
+8. **Partitions**:
+9. **Summary**:
+10. **Install**:
+11. **Finish**:
