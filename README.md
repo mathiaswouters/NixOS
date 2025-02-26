@@ -32,13 +32,13 @@ Explanation ...
    - Enter **name**
    - Enter **log in name**
    - Enter **password**
-   - Check the **Use the same password for the administrator account.** box
+   - Check the `Use the same password for the administrator account.` box
    - Press `Next`
 5. **Desktop**:
    - Select `No desktop`
    - Press `Next`
 6. **Unfree Software**:
-   - Check the **Allow unfree software** box
+   - Check the `Allow unfree software` box
    - Press `Next`
 7. **Partitions**:
    - Partition the disk
