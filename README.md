@@ -48,8 +48,8 @@ Explanation ...
 9. **Install**:
    - Press `Next`
 10. **Finish**:
-   - Press `Done`
-   - Shutdown system
+    - Press `Done`
+    - Shutdown system
 
 ### Configure NixOS
 
