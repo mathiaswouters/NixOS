@@ -50,3 +50,7 @@ Explanation ...
 10. **Finish**:
    - Press `Done`
    - Shutdown system
+
+### Configure NixOS
+
+
