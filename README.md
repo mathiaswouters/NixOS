@@ -58,8 +58,7 @@ Search Nix packages using this [link](https://search.nixos.org/packages)
 - Configure NixOS Config file: `sudo nano /etc/nixos/configuration.nix`
 
 ### Rebuild NixOS
-
-- `sudo nixos-rebuild switch`
+`sudo nixos-rebuild switch`
 
 ### Nix flakes
 ...
