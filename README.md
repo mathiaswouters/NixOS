@@ -59,7 +59,7 @@ Search Nix packages using this [link](https://search.nixos.org/packages)
 
 ### Rebuild NixOS
 
-- ``
+- `sudo nixos-rebuild switch`
 
 ### Nix flakes
 ...
