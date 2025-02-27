@@ -66,12 +66,14 @@
   };
 
   # Sound configuration with PipeWire
+  sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -85,39 +87,70 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  environment.sessionVariables = {
+    # If your cursor becomes invisible
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  hardware = {
+    # Opengl
+    opengl.enable = true;
+    # Most wayland compositors need this
+    nvidia.modesetting.enable = true;
+  };
+
+  # XDG / Desktop Portals
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  # Essential tools
+    # Utilities / Dependencies
     wget
     git
     vim
     neovim
     htop
-    firefox
     kitty
+
+    # System utilities
+    brightnessctl
+    pamixer
+    networkmanagerapplet
     
     # Wayland utilities
     waybar
-    wofi
+    eww # MAYBE ???? ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+    dunst # MAYBE ???? ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+    libnotify # --> needed for dunst --> MAYBE ???? ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+    rofi-wayland # App launcher --> this one or wofi ???????????????
+    wofi # App launcher --> this one or rofi-wayland ???????????????
     swww  # Wallpaper
     wl-clipboard
-    grim  # Screenshot
-    slurp # Area selection
+    grim  # Screenshot (needs slurp)
+    slurp # Screenshot - screen area selection (needs grim)
     mako  # Notifications
     
     # Appearance
     nerdfonts
     papirus-icon-theme
     
+    # Default Applications
+    firefox
+
     # Development tools
     gnumake
     gcc
-    
-    # System utilities
-    brightnessctl
-    pamixer
-    networkmanagerapplet
+
+    # Productivity
+
+    # Gaming
+
+    # Video / Video editing
+
   ];
 
   # Fonts configuration

@@ -53,15 +53,20 @@ Search Nix packages using this [link](https://search.nixos.org/packages)
     - Press `Done`
     - Shutdown system
 
-### Configure NixOS
+## Configure NixOS
 
 - Configure NixOS Config file: `sudo nano /etc/nixos/configuration.nix`
 
-### Rebuild NixOS
+## Rebuild NixOS
 `sudo nixos-rebuild switch`
 
-### Nix flakes
+## Nix flakes
 ...
 
-### Nix Home Manager
+## Nix Home Manager
 ...
+
+## Configure Hyprland
+Watch [YouTube Video](https://www.youtube.com/watch?v=61wGzIv12Ds&t=4m20s) at 4m20s.
+
+`sudo nano ~/.config/hypr/hyprland.conf`
