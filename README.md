@@ -53,6 +53,10 @@ Search Nix packages using this [link](https://search.nixos.org/packages)
     - Press `Done`
     - Shutdown system
 
+#### Fix dual boot
+- `sudo nano /etc/nixos/configuration.nix`
+- `...`
+
 ## Configure NixOS
 
 - Configure NixOS Config file: `sudo nano /etc/nixos/configuration.nix`
