@@ -57,3 +57,12 @@ Search Nix packages using this [link](https://search.nixos.org/packages)
 
 - Configure NixOS Config file: `sudo nano /etc/nixos/configuration.nix`
 
+### Rebuild NixOS
+
+- ``
+
+### Nix flakes
+...
+
+### Nix Home Manager
+...
