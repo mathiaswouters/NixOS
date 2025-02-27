@@ -55,9 +55,17 @@
       layout = "us";
       variant = "";
     };
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
+  };
+
+  # Configure greetd as the display manager
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        #command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # Text-based Login (Comment on of the greeters)
+        command = "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -c Hyprland"; # Graphical Login (Comment on of the greeters)
+        user = "greeter";
+      };
     };
   };
 
@@ -107,8 +115,7 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # Packages
   environment.systemPackages = with pkgs; [
     # Utilities / Dependencies
     wget
@@ -116,7 +123,8 @@
     vim
     neovim
     htop
-    kitty
+    kitty # terminal
+    nautilus # File manager
 
     # System utilities
     brightnessctl
@@ -124,14 +132,10 @@
     networkmanagerapplet
     
     # Wayland utilities
-    waybar
-    eww # MAYBE ???? ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
-    dunst # MAYBE ???? ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
-    libnotify # --> needed for dunst --> MAYBE ???? ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
-    rofi-wayland # App launcher --> this one or wofi ???????????????
-    wofi # App launcher --> this one or rofi-wayland ???????????????
+    waybar # Bar
+    rofi # App launcher
     swww  # Wallpaper
-    wl-clipboard
+    # Display manager
     grim  # Screenshot (needs slurp)
     slurp # Screenshot - screen area selection (needs grim)
     mako  # Notifications
