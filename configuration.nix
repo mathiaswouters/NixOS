@@ -6,9 +6,6 @@
       ./hardware-configuration.nix
     ];
 
-  # ntfs support
-  boot.supportedFilesystems = [ "ntfs" ];
-
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
