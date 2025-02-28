@@ -66,7 +66,3 @@ Search Nix packages using this [link](https://search.nixos.org/packages)
 ## Nix Home Manager
 ...
 
-## Configure Hyprland
-Watch [YouTube Video](https://www.youtube.com/watch?v=61wGzIv12Ds&t=4m20s) at 4m20s.
-
-`sudo nano ~/.config/hypr/hyprland.conf`
