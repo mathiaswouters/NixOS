@@ -182,6 +182,7 @@
 
     # System utilities
     brightnessctl # Control device brightness
+    networkmanagerapplet
     
     # Wayland utilities
     waybar # Bar
