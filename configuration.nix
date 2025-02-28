@@ -7,38 +7,61 @@
     ];
 
   # Bootloader.
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "nodev" ];
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
+  boot = {
+    kernelParams = ["nohibernate"];
+    tmp.cleanOnBoot = true;
+    supportedFilesystems = ["ntfs"];
+    loader = {
+      efi.canTouchEfiVariables = true;
+      grub = {
+        device = "nodev";
+        efiSupport = true;
+        enable = true;
+        useOSProber = true;
+        timeoutStyle = "menu";
+      };
+      timeout = 300;
+    };
+    kernelModules = ["tcp_bbr"];
+    kernel.sysctl = {
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "net.core.default_qdisc" = "fq";
+      "net.core.wmem_max" = 1073741824;
+      "net.core.rmem_max" = 1073741824;
+      "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
+      "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
+    };
+  };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  # Networking
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    wireless.enable = true;
+    firewall = {
+      enable = false; # Disable the firewall
+      # allowedTCPPorts = [ ... ]; # Open TCP ports in the firewall
+      # allowedUDPPorts = [ ... ]; # Open UDP ports in the firewall
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Brussels";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "nl_BE.UTF-8";
-    LC_IDENTIFICATION = "nl_BE.UTF-8";
-    LC_MEASUREMENT = "nl_BE.UTF-8";
-    LC_MONETARY = "nl_BE.UTF-8";
-    LC_NAME = "nl_BE.UTF-8";
-    LC_NUMERIC = "nl_BE.UTF-8";
-    LC_PAPER = "nl_BE.UTF-8";
-    LC_TELEPHONE = "nl_BE.UTF-8";
-    LC_TIME = "nl_BE.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "nl_BE.UTF-8";
+      LC_IDENTIFICATION = "nl_BE.UTF-8";
+      LC_MEASUREMENT = "nl_BE.UTF-8";
+      LC_MONETARY = "nl_BE.UTF-8";
+      LC_NAME = "nl_BE.UTF-8";
+      LC_NUMERIC = "nl_BE.UTF-8";
+      LC_PAPER = "nl_BE.UTF-8";
+      LC_TELEPHONE = "nl_BE.UTF-8";
+      LC_TIME = "nl_BE.UTF-8";
+    };
   };
 
   # Enable Hyprland
@@ -86,11 +109,14 @@
     jack.enable = true;
   };
 
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mathias = {
     isNormalUser = true;
     description = "Mathias Wouters";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "flatpak" "disk" "qemu" "kvm" "libvirtd" "sshd" "root" "docker" ];
     packages = with pkgs; [];
   };
 
@@ -112,52 +138,21 @@
   };
 
   # XDG / Desktop Portals
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
 
-  # Packages
-  environment.systemPackages = with pkgs; [
-    # Utilities / Dependencies
-    wget
-    git
-    vim
-    neovim
-    htop
-    kitty # terminal
-    nautilus # File manager
+  # Steam
+  # programs.steam = {
+  #   enable = true;
+  #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  #   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  # };
 
-    # System utilities
-    brightnessctl
-    pamixer
-    networkmanagerapplet
-    
-    # Wayland utilities
-    waybar # Bar
-    rofi # App launcher
-    swww  # Wallpaper
-    # Display manager
-    grim  # Screenshot (needs slurp)
-    slurp # Screenshot - screen area selection (needs grim)
-    mako  # Notifications
-    
-    # Appearance
-    nerdfonts
-    papirus-icon-theme
-    
-    # Default Applications
-    firefox
-
-    # Development tools
-    gnumake
-    gcc
-
-    # Productivity
-
-    # Gaming
-
-    # Video / Video editing
-
-  ];
+  # Enable virtualisation
+  # virtualisation.libvirtd.enable = true;
 
   # Fonts configuration
   fonts.packages = with pkgs; [
@@ -168,31 +163,56 @@
     font-awesome
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  # Packages
+  environment.systemPackages = with pkgs; [
+    # Utilities / Dependencies
+    wget
+    curl
+    git
+    neofetch
+    whois
+    ufw
+    nano
+    vim
+    neovim
+    tmux
+    htop # Process viewer
+    kitty # Terminal
+    nautilus # File manager
 
-  # List services that you want to enable:
+    # System utilities
+    brightnessctl # Control device brightness
+    
+    # Wayland utilities
+    waybar # Bar
+    rofi # App launcher
+    swww  # Wallpaper
+    grim  # Screenshot (needs slurp)
+    slurp # Screenshot - screen area selection (needs grim)
+    mako  # Notifications
+    
+    # Appearance
+    nerdfonts
+    papirus-icon-theme
+    
+    # Default Applications
+    firefox
+    bitwarden-desktop
+    spotify
+    logiops
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+    # Development tools
+    python3Full
+    docker
+    vscode
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    # Video / Video editing
+    davinci-resolve
+    gimp
+    obs-studio
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  ];
+
+  system.stateVersion = "24.11"; # Leave the version as it is
 
 }
