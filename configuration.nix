@@ -37,7 +37,6 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    wireless.enable = true;
     firewall = {
       enable = false; # Disable the firewall
       # allowedTCPPorts = [ ... ]; # Open TCP ports in the firewall
@@ -67,7 +66,6 @@
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
-    nvidiaPatches = true;
     xwayland.enable = true;
   };
 
@@ -93,7 +91,6 @@
   };
 
   # Sound configuration with PipeWire
-  sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -128,7 +125,6 @@
     # Opengl configure graphics (adjust for your hardware)
     opengl = {
       enable = true;
-      driSupport = true;
     };
     # Most wayland compositors need this
     nvidia.modesetting.enable = true;
