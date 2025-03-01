@@ -122,8 +122,8 @@
   };
 
   hardware = {
-    # Opengl configure graphics (adjust for your hardware)
-    opengl = {
+    # Configure graphics (adjust for your hardware)
+    graphics = {
       enable = true;
     };
     # Most wayland compositors need this
@@ -150,7 +150,7 @@
   # Fonts configuration
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
     font-awesome
