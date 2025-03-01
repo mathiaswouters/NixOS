@@ -164,7 +164,6 @@
     git
     neofetch
     whois
-    ufw
     nano
     vim
     neovim
