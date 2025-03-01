@@ -68,6 +68,7 @@ Search Nix packages using this [link](https://search.nixos.org/packages)
 
 ## Install and Configure system
 ```bash
+sudo nix-env -iA nixos.git
 git clone https://github.com/mathiaswouters/nixos
 cd nixos
 chmod +x setup.sh
