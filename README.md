@@ -66,3 +66,10 @@ Search Nix packages using this [link](https://search.nixos.org/packages)
 ## Nix Home Manager
 ...
 
+## Install and Configure system
+```bash
+git clone https://github.com/mathiaswouters/nixos
+cd nixos
+chmod +x setup.sh
+./setup.sh
+```
