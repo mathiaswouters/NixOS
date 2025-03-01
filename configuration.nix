@@ -92,12 +92,6 @@
     };
   };
 
-  # Configure graphics (adjust for your hardware)
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-  };
-
   # Sound configuration with PipeWire
   sound.enable = true;
   security.rtkit.enable = true;
@@ -131,8 +125,11 @@
   };
 
   hardware = {
-    # Opengl
-    opengl.enable = true;
+    # Opengl configure graphics (adjust for your hardware)
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
     # Most wayland compositors need this
     nvidia.modesetting.enable = true;
   };
